@@ -1,0 +1,38 @@
+[package]
+name = "bevy_falseterm"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[example]]
+name = "minimal"
+
+[dependencies]
+bevy = { version = "0.13.0", features = [
+    "dynamic_linking", "wayland"
+] } #todo!() when releasing officially, remove dynamic linking.
+bevy_window = { version = "0.13.0", features = ["serialize"] }
+thiserror = "1.0.58"
+
+[profile.release]
+lto = "thin"
+# debug = true
+
+[profile.opt]
+inherits = "release"
+lto = "fat"
+codegen-units = 1
+# strip = "debuginfo" # TODO: or strip = true
+opt-level = 3
+
+[profile.integration]
+inherits = "test"
+
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
