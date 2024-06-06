@@ -14,8 +14,14 @@ fn main() {
         //.add_plugins(PanCamPlugin)
         .add_plugins(DefaultFalseTermPlugins)
         .add_systems(Startup, startup)
-        .add_systems(Update, temp)
+        .add_systems(Update, debugging)
         .run();
+}
+
+fn custom_falseterm() -> FTBuilder {
+    let ftb = FTBuilder::default();
+
+    ftb
 }
 
 pub fn startup(mut co: Commands) {
@@ -26,7 +32,7 @@ pub fn startup(mut co: Commands) {
                 focused: false,
                 ..Default::default()
             },
-            FTBuilder::default(),
+            custom_falseterm(),
         ))
         .id();
     let id2 = co
@@ -36,7 +42,7 @@ pub fn startup(mut co: Commands) {
                 focused: false,
                 ..Default::default()
             },
-            FTBuilder::default(),
+            custom_falseterm(),
         ))
         .id();
 
@@ -66,7 +72,7 @@ pub fn startup(mut co: Commands) {
     ));
 }
 
-pub fn temp(a: Query<(Entity, &Window, &FTBuilder)>) {
+pub fn debugging(a: Query<(Entity, &Window, &FTBuilder)>) {
     for (e, w, ftb) in a.iter() {
         let name = &w.name;
         let height = ftb.absolute_height(w);
