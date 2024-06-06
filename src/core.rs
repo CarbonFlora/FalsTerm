@@ -14,3 +14,13 @@ impl Default for FTBuilder {
         Self {}
     }
 }
+
+impl FTBuilder {
+    pub fn absolute_height(&self, window: &Window) -> f32 {
+        window.resolution.height()
+    }
+
+    pub fn absolute_width(&self, window: &Window) -> f32 {
+        window.resolution.width()
+    }
+}
