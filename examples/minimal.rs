@@ -20,6 +20,14 @@ fn main() {
 
 fn custom_falseterm() -> FTBuilder {
     let ftb = FTBuilder::default();
+    let node1 = NodeBundle {
+        //move to FTBuilder function.
+        node: todo!(),
+        style: todo!(),
+        background_color: todo!(),
+        z_index: ZIndex::Global(i32::MAX),
+        ..Default::default()
+    };
 
     ftb
 }
@@ -75,8 +83,5 @@ pub fn startup(mut co: Commands) {
 pub fn debugging(a: Query<(Entity, &Window, &FTBuilder)>) {
     for (e, w, ftb) in a.iter() {
         let name = &w.name;
-        let height = ftb.absolute_height(w);
-        let width = ftb.absolute_width(w);
-        println!("{:?}: {:?}w x {:?}h", name, width, height);
     }
 }

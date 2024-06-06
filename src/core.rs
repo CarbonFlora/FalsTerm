@@ -9,31 +9,8 @@ impl Plugin for DefaultFalseTermPlugins {
 }
 
 #[derive(Component, Debug, Clone)]
-pub struct FTNode {
-    shift: Shift,
-    text_content: String,
-    text_color: Color,
-    text_direction: Direction,
-    background_color: Color,
-}
-
-#[derive(Debug, Clone, Copy)]
-pub enum Shift {
-    Top,
-    Center,
-    Bottom,
-}
-
-#[derive(Debug, Clone, Copy)]
-pub enum Direction {
-    LeftToRight,
-    Center,
-    RightToLeft,
-}
-
-#[derive(Component, Debug, Clone)]
 pub struct FTBuilder {
-    contents: Vec<FTNode>,
+    contents: Vec<NodeBundle>,
     text_height: f32,
     padding: f32,
 }
@@ -49,15 +26,17 @@ impl Default for FTBuilder {
 }
 
 impl FTBuilder {
-    pub fn absolute_height(&self, window: &Window) -> f32 {
+    pub fn add_horizontal_bar() {}
+}
+
+impl FTBuilder {
+    fn absolute_height(&self, window: &Window) -> f32 {
         window.resolution.height()
     }
 
-    pub fn absolute_width(&self, window: &Window) -> f32 {
+    fn absolute_width(&self, window: &Window) -> f32 {
         window.resolution.width()
     }
-
-    pub fn horizontal_bar(&mut self, window: &Window) {}
 }
 
 fn sync_ftbuilder(mut q_primary: Query<(&Window, &FTBuilder, &mut Children), Changed<FTBuilder>>) {
