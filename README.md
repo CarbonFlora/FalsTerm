@@ -5,3 +5,4 @@ window independent.
 builder pattern with dynamic structuring.
 user friendly. 
 uses the vim theme config.
+    The default theme should be lunar or ayu?
